@@ -20,3 +20,14 @@ RUN apt-get update \
  && mv /osxcross-target /osxcross/target
 
 ENV PATH /osxcross/target/bin:$PATH
+
+RUN git clone --depth=1 https://github.com/madler/zlib.git /osxcross/zlib-src \
+ && eval $(osxcross-conf) \
+ && mkdir /osxcross/zlib-build32 /osxcross/zlib-build64 \
+ && cd /osxcross/zlib-build32 \
+ && cmake /osxcross/zlib-src -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_C_COMPILER=i386-apple-$OSXCROSS_TARGET-gcc -DCMAKE_INSTALL_PREFIX=/osxcross/target/x86_64-apple-$OSXCROSS_TARGET -DINSTALL_LIB_DIR=/osxcross/target/x86_64-apple-$OSXCROSS_TARGET/i386 \
+ && make install \
+ && cd /osxcross/zlib-build64 \
+ && cmake /osxcross/zlib-src -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_C_COMPILER=x86_64-apple-$OSXCROSS_TARGET-gcc -DCMAKE_INSTALL_PREFIX=/osxcross/target/x86_64-apple-$OSXCROSS_TARGET \
+ && make install \
+ && rm -r /osxcross/zlib-src /osxcross/zlib-build32 /osxcross/zlib-build64
