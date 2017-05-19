@@ -2,6 +2,7 @@ FROM buildpack-deps:jessie
 
 ENV OSX_SDK MacOSX10.10.sdk
 ENV GCC_VERSION 4.8.5
+ENV MACOSX_DEPLOYMENT_TARGET 10.6
 
 ENV PATH /osxcross/target/bin:$PATH
 ENV OSXCROSS_GCC_NO_STATIC_RUNTIME 1
@@ -14,8 +15,8 @@ RUN apt-get update \
  && wget -O "/osxcross/tarballs/gcc-${GCC_VERSION}.tar.bz2" "https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.bz2" \
  && cd /osxcross \
  && UNATTENDED=1 ./build.sh \
- && UNATTENDED=1 GCC_VERSION="${GCC_VERSION}" ./build_gcc.sh \
- && UNATTENDED=1 MACOSX_DEPLOYMENT_TARGET=10.6 ./tools/osxcross-macports install zlib \
+ && UNATTENDED=1 ./build_gcc.sh \
+ && UNATTENDED=1 ./tools/osxcross-macports install zlib \
  && cd / \
  && apt-get purge -y --auto-remove clang libmpc-dev libmpfr-dev libgmp-dev \
  && mv /osxcross/target /osxcross-target \
