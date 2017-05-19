@@ -21,3 +21,6 @@ RUN apt-get update \
  && rm -rf /osxcross \
  && mkdir /osxcross \
  && mv /osxcross-target /osxcross/target
+
+RUN ln -s /osxcross/target/macports/pkgs/opt/local/lib/libz.dylib /usr/lib/libz.dylib \
+ && ln -s /bin/true /osxcross/target/bin/install_name_tool
