@@ -4,6 +4,7 @@ ENV OSX_SDK MacOSX10.10.sdk
 ENV GCC_VERSION 4.8.5
 
 ENV PATH /osxcross/target/bin:$PATH
+ENV OSXCROSS_GCC_NO_STATIC_RUNTIME 1
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends clang libmpc-dev libmpfr-dev libgmp-dev cmake libxml-libxml-perl libxml-libxslt-perl python3-sphinx \
