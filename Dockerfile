@@ -9,7 +9,6 @@ ENV OSXCROSS_GCC_NO_STATIC_RUNTIME 1
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends clang libmpc-dev libmpfr-dev libgmp-dev cmake libxml-libxml-perl libxml-libxslt-perl python3-sphinx \
- && rm -r /var/lib/apt/lists/* \
  && git clone --depth=1 https://github.com/tpoechtrager/osxcross.git /osxcross \
  && wget -O "/osxcross/tarballs/${OSX_SDK}.tar.xz" "https://github.com/phracker/MacOSX-SDKs/releases/download/MacOSX10.11.sdk/${OSX_SDK}.tar.xz" \
  && wget -O "/osxcross/tarballs/gcc-${GCC_VERSION}.tar.bz2" "https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.bz2" \
@@ -23,7 +22,8 @@ RUN apt-get update \
  && rm -rf /osxcross \
  && mkdir /osxcross \
  && mv /osxcross-target /osxcross/target \
- && apt-get install -y --no-install-recommends ccache
+ && apt-get install -y --no-install-recommends ccache \
+ && rm -r /var/lib/apt/lists/*
 
 ENV PATH /usr/lib/ccache:$PATH
 
