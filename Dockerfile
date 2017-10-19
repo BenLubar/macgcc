@@ -25,9 +25,6 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends ccache \
  && rm -r /var/lib/apt/lists/* \
  && ln -s ../../bin/ccache /usr/lib/ccache/x86_64-apple-darwin14-gcc \
- && ln -s ../../bin/ccache /usr/lib/ccache/x86_64-apple-darwin14-g++
-
-ENV PATH /usr/lib/ccache:$PATH
-
-RUN ln -s /osxcross/target/macports/pkgs/opt/local/lib/libz.dylib /usr/lib/libz.dylib \
+ && ln -s ../../bin/ccache /usr/lib/ccache/x86_64-apple-darwin14-g++ \
+ && ln -s /osxcross/target/macports/pkgs/opt/local/lib/libz.dylib /usr/lib/libz.dylib \
  && ln -s /bin/true /osxcross/target/bin/install_name_tool
