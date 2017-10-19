@@ -22,7 +22,10 @@ RUN apt-get update \
  && mv /osxcross/target /osxcross-target \
  && rm -rf /osxcross \
  && mkdir /osxcross \
- && mv /osxcross-target /osxcross/target
+ && mv /osxcross-target /osxcross/target \
+ && apt-get install -y --no-install-recommends ccache
+
+ENV PATH /usr/lib/ccache:$PATH
 
 RUN ln -s /osxcross/target/macports/pkgs/opt/local/lib/libz.dylib /usr/lib/libz.dylib \
  && ln -s /bin/true /osxcross/target/bin/install_name_tool
