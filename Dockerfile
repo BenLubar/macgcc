@@ -12,7 +12,8 @@ RUN apt-get update \
  && git clone --depth=1 https://github.com/tpoechtrager/osxcross.git /osxcross \
  && wget -O "/osxcross/tarballs/${OSX_SDK}.tar.xz" "https://github.com/phracker/MacOSX-SDKs/releases/download/MacOSX10.11.sdk/${OSX_SDK}.tar.xz" \
  && wget -O "/osxcross/tarballs/gcc-${GCC_VERSION}.tar.bz2" "https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.bz2" \
- && curl "https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz" | tar xzC "/opt/cmake" --strip-components=1 \
+ && mkdir -p "/opt/cmake" \
+ && wget -O - "https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz" | tar xzC "/opt/cmake" --strip-components=1 \
  && cd /osxcross \
  && UNATTENDED=1 ./build.sh \
  && UNATTENDED=1 ./build_gcc.sh \
