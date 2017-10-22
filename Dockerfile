@@ -15,7 +15,7 @@ RUN apt-get update \
  && cd /osxcross \
  && UNATTENDED=1 ./build.sh \
  && UNATTENDED=1 ./build_gcc.sh \
- && UNATTENDED=1 ./build_llvm_dysmutil.sh \
+ && UNATTENDED=1 ./build_llvm_dsymutil.sh \
  && UNATTENDED=1 ./tools/osxcross-macports install zlib \
  && cd / \
  && apt-get purge -y --auto-remove clang libmpc-dev libmpfr-dev libgmp-dev \
